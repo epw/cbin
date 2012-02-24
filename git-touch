@@ -1,0 +1,10 @@
+#! /bin/bash
+
+if [ $# -lt 1 ]
+then
+    echo "Usage: git-touch filename"
+    exit 1
+fi
+
+touch "$1"
+git add "$1"
