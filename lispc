@@ -1,0 +1,10 @@
+#! /bin/sh
+if [ $# -gt 1 ]
+then
+    toplevel=$1
+    shift
+else
+    toplevel=main
+fi
+
+sbcl --load "$1" --eval "(save-lisp-and-die \"`basename $1 .lisp`\" :executable t :toplevel '$toplevel)"

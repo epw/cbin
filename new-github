@@ -1,0 +1,12 @@
+#! /bin/bash
+
+GITUSER=epw
+
+mkdir "$1"
+cd "$1"
+git init
+touch README
+git add README
+git commit -a -m "First commit"
+git remote add origin git@github.com:$GITUSER/"$1".git
+git push -u origin master

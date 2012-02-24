@@ -3,8 +3,19 @@ scripts and programs over the years, and always copy the ~/bin
 directory from my most up-to-date computer when starting a new
 one. Instead, they can now be kept synchronized.
 
-To install, add this line to your .bashrc or similar file:
-PATH=$PATH:/path/where/you/downloaded/cbin
+For any public users who have found this, I hope some of the scripts
+are useful, but do note that they are a reflection of ten years of
+learning Linux, and so many make sense to me and no-one else, may do
+what you consider damage to your computer, and otherwise are very
+strange. Use at your own risk. Someday, I may document more of
+them. Note that this also includes a number of variable definitions,
+aliases, and a few functions for the shell.
+
+To install, add these lines to your .bashrc or similar file (assuming
+cbin is in your home directory)
+
+PATH=$PATH:$HOME/cbin
+source $HOME/cbin/.cbashrc
 
 Or, from within cbin, run the program
     $ ./install-cbin.sh

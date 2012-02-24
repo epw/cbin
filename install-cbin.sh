@@ -13,10 +13,12 @@ then
     echo >> $rcfile
 fi
 
-echo "PATH=\$PATH:$thisdir" >> $rcfile
+echo "Writing"
 
-echo "Wrote"
-echo "PATH=\$PATH:$thisdir"
+
+echo "PATH=\$PATH:$thisdir" | tee $rcfile
+echo "source $thisdir/.cbashrc"
+
 echo "to $rcfile."
 echo
 echo "Run \"source $rcfile\" to begin using cbin."

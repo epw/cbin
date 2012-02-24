@@ -1,0 +1,2 @@
+#! /bin/bash
+ping -c 1 96.34.84.16 | head -2 | tail -1 | awk -F = '{print $4}'

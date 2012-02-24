@@ -1,0 +1,27 @@
+#! /bin/sh
+if [[ $# < 1 ]]
+    then
+    echo "Usage: newadventure name"
+    exit
+fi
+
+mkdir $1
+rm adventure
+ln -s $1 adventure
+n=2
+while [ -d adventure$n ]
+  do
+  n=`expr $n + 1`
+done
+echo "Creating adventure$n ($1)"
+ln -s $1 adventure$n
+touch $1/index.html
+echo "<html>" >> $1/index.html
+echo "<head>" >> $1/index.html
+echo "<title></title>" >> $1/index.html
+echo "<link rel='stylesheet' type='text/css' href='../style.css' />" >> $1/index.html
+echo "<style type='text/css'>" >> $1/index.html
+echo "</style>" >> $1/index.html
+echo "<body>" >> $1/index.html
+echo "</body>" >> $1/index.html
+echo "</html>" >> $1/index.html

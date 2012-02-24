@@ -1,0 +1,23 @@
+#! /bin/bash
+
+# Constants
+TARGET=android-10
+NAMESPACE=org.willisson.eric
+
+# Get project name
+project=$1
+shift
+
+# Make project
+mkdir "$project"
+cd "$project"
+android create project --name "$project" --target $TARGET --path . --package $NAMESPACE."$project" --activity "$project" $*
+
+# Edit configuration files
+grep -v "</manifest>" AndroidManifest.xml > /tmp/m.xml
+echo '    <uses-sdk android:minSdkVersion="2" />' >> /tmp/m.xml
+echo "</manifest>" >> /tmp/m.xml
+cat /tmp/m.xml > AndroidManifest.xml
+
+# Make project Ant-ready
+android update project --path . --target $TARGET --subprojects

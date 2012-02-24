@@ -1,0 +1,55 @@
+#! /bin/bash
+
+message=0
+if [ $# -eq 0 ]; then
+    x=1
+else
+    x=$1
+    length=`expr length "$x"`
+    if [ `expr substr $x $length 1` = "m" ]; then
+	length=`expr $length - 1`
+	x=`expr substr $x 1 $length`
+	x=`expr $x \* 60`
+    elif [ `expr substr $x $length 1` = "h" ]; then
+	length=`expr $length - 1`
+	x=`expr substr $x 1 $length`
+	x=`expr $x \* 3600`
+    elif [ `expr substr $x $length 1` = "s" ]; then
+	length=`expr $length - 1`
+	x=`expr substr $x 1 $length`
+    fi
+    
+    if [ $# -gt 1 ]; then
+	    message=$2
+    fi
+fi
+echo -n "Time: $x"
+while [ $x -gt 0 ]
+  do
+  if [ $x -lt 9 ]; then
+      echo -n -e "\b";
+  elif [ $x -lt 99 ]; then
+      echo -n -e "\b\b";
+  elif [ $x -lt 999 ]; then
+      echo -n -e "\b\b\b";
+  elif [ $x -lt 9999 ]; then
+      echo -n -e "\b\b\b\b";
+  fi
+  echo -n "$x"
+  if [ $x -eq 9 ]; then
+      echo -n -e " \b";
+  elif [ $x -eq 99 ]; then
+      echo -n -e " \b";
+  elif [ $x -eq 999 ]; then
+      echo -n -e " \b";
+  elif [ $x -eq 9999 ]; then
+      echo -n -e " \b";
+  fi
+
+  x=`expr $x - 1`
+  sleep 1
+done
+echo -e "\nDone."
+if [ $message != 0 ]; then
+    screenmessage $message
+fi

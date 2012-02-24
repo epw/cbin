@@ -1,0 +1,44 @@
+#! /usr/bin/env python
+
+import sys, os, re
+
+force = False
+
+if len(sys.argv) > 1:
+    if sys.argv[1] == "-f":
+        force = True
+        del (sys.argv[1])
+    program = sys.argv[1]
+else:
+    print "Usage: " + sys.argv[0] + " program"
+    sys.exit (1)
+
+if os.path.exists (".writemake"):
+    print "Local .writemake"
+    form = open (".writemake").read()
+    form = form.replace ("%s", program)
+    form = form.replace ("    ", "\t")
+    Makefile = open ("Makefile", "a")
+    Makefile.write (form)
+    Makefile.write ("\n")
+    Makefile.close ()
+    sys.exit (0)
+
+pwd = os.getcwd()
+pwd = re.sub (r'/home/[^/]*', '', pwd)
+
+Makefile = open ("Makefile", "a")
+
+if pwd == "/code/inform":
+    print "Inform"
+    Makefile.write (program + ":\n")
+    Makefile.write ("\tinform " + program + ".inf\n")
+    Makefile.write ("\txzip " + program + ".z5\n")
+#elif re.match (r'/code/c', pwd) or force:
+else:
+    print "C"
+    Makefile.write (program + ": " + program + ".o\n")
+    Makefile.write ("\t$(CC) $(CFLAGS) -o " + program + " " + program)
+    Makefile.write (".o $(LIBS)\n")
+Makefile.write ("\n")
+Makefile.close ()

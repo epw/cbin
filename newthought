@@ -1,0 +1,12 @@
+#! /bin/bash
+
+if [ $# -lt 1 ]
+then
+    echo -n "What is the name of this thought? "
+    read name
+else
+    name=$1
+fi
+
+echo "Type the thought. Control-D to finish."
+cat > $HOME/thoughts/$name

@@ -1,0 +1,113 @@
+#!/bin/bash
+# See Homestar Runner > StrongBad e-mail > "Virus".
+# See also: Total Perspective Vortex.
+# Rename to "edgarware.exe" for maximum authenticity.
+#     -- LionsPhil
+# (Yes, I'm aware that it's far too wide. That's because I aimed for filling a standard 80-char terminal. It also assumes 24-25 high.)
+# (This will also break horribly on non-ANSI terminals. Too bad.)
+# (I'm also aware that it's missing sound, but that's partly deliberate (and also a PITA to do).)
+
+clear
+echo
+echo -e "  \e[47m                                                                            \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                             \e[33;1mEdgar the Virus                            \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                             \e[33;1m     Hunter                       \e[41m  \e[43m \e[41m \e[0m     \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                              \e[41m \e[0;1;7m \e[0;43m \e[0;1;7m  \e[0;43m \e[0m    \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m  programmed entirely                                          \e[43m  \e[0;1;7m \e[0;43m \e[0m     \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m  in mom's basement                                          \e[44m \e[34;1;7m      \e[0;44m \e[0m   \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m  by Edgar      c1982                                       \e[34;1;7m       \e[37m  \e[34m \e[0m  \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m                                                                            \e[0m"
+echo
+
+read theprincipiadiscordia # while waiting for the user to press Enter
+
+clear
+echo
+echo -e "  \e[47m                                                                            \e[0m"
+echo -e "  \e[47m  \e[0m                            \e[33;1mVirus Protection                            \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                             \e[33;1mversion .0001                              \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                        \e[1mLast scan was NEVER ago.                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m                                                                            \e[0m"
+echo -en "\e[3A\e[17C\e[33m"
+# Alright Edgar, now drop a *train* on 'em!
+perl << PROGRESSBAR
+use strict; use warnings;
+#use Time::HiRes qw(sleep); # Missing from lab's Perl (no suprise there, then)
+# Mmm...embedded Perl. Don't forget to escape the dollars...
+$| = 1;
+for(my \$progress = 0; \$progress < 23; \$progress++) {
+	print "\e[43m \e[40m ";
+	system "sleep 0.2"; #sleep 0.2; Gratuitous forkage!
+	     if(\$progress % 4 == 0) {
+		# s and u are the save and restore cursor position codes, respectively, but don't work in xterms
+		# f is an absolute co-ordinate move
+		#print "\e[s\e[8;20fscanning...\e[u";
+		print "\e[1m\e[8;35fscanning...\e[9;".(\$progress*2 + 20)."f\e[0;33m";
+	} elsif(\$progress % 4 == 2) {
+		print      "\e[8;35f           \e[9;".(\$progress*2 + 20).'f';
+	}
+}
+print "\n\n\n\n";
+PROGRESSBAR
+
+sleep 0.5
+
+clear
+# ASCII-art-tastic (three lines is Not Enough for inverse-block digits)
+echo
+echo -e "  \e[47m                                                                            \e[0m"
+echo -e "  \e[47m  \e[0m                             \e[33;1mScan Complete!                             \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0;31;1m                      ,.  ,--. ,--.   ,--. ,--. ----                    \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0;31;1m                     /_|_  __/   -<   >--<  __/   /                     \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0;31;1m                       |  /___ .__/ / \__/ /___  |                      \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                             \e[1mViruses Found\e[0m                              \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                                                                        \e[47m  \e[0m"
+echo -e "  \e[47m  \e[0m                             \e[33;1mA New Record!!                             \e[47m  \e[0m"
+echo -e "  \e[47m                                                                            \e[0m"
+echo
+
+# Waaugh! That is not a small number! That is a big number! What'm I gonna do?
+sleep 3
+
+clear
+echo
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                             FLAGRANT SYSTEM ERROR                            \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                Computer over.                                \e[0m"
+echo -e " \e[37;44;1m                               Virus = Very Yes.                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+echo -e " \e[37;44;1m                                                                              \e[0m"
+# Computer over? Virus equals very yes? That's not a good prize!
+sleep 5
+
+# No, I'm not doing the "melt" effect.
+# Back to console. Ish. >=)
+echo -e "\e[0m\nSegmentation fault"
+sleep 0.5
+echo "end_request: I/O error, dev 03:05(hda), sector $RANDOM"
+echo "EXT3-fs error(device ide0(3.5): ext3_get_inode_loc: unable to read inode block -inode:$RANDOM, block:$RANDOM"
+# Oooh!

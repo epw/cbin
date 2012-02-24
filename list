@@ -1,0 +1,24 @@
+#! /bin/sh
+
+if [ $1 = 'compressed' ]
+    then
+    ls *.tar* *.rpm *.deb *.zip *.tgz *.rar 2> /dev/null
+elif [ $1 = 'directory' -o $1 = 'directories' ]
+    then
+    ls -d */ 2> /dev/null
+elif [ $1 = 'music' -o $1 = 'sound' -o $1 = 'sounds' ]
+    then
+    ls *.mp3 *.ogg *.wav *.wma *.r* *.mp4 *.m4a *.aac 2> /dev/null
+elif [ $1 = 'image' -o $1 = 'images' ]
+    then
+    ls *.bmp *.jpg *.jpeg *.png *.gif *.tga 2> /dev/null
+elif [ $1 = 'movie' -o $1 = 'movies' -o $1 = 'video' -o $1 = 'videos' ]
+    then
+    ls *.mov *.mpeg *.mpg *.avi *.wmv *.rm *.rmvb 2> /dev/null
+elif [ $1 = 'text' ]
+    then
+    file * | grep text | awk -F ':' '{print $1}'
+else
+    echo Unknown option \"$1\"
+    echo known possibilities: compressed, directory, music, image, video, text
+fi

@@ -1,0 +1,56 @@
+# -*- Mode: Bash -*-
+# To be included from .bashrc or similar files
+
+alias apt-search='apt-cache search'
+
+LD_LIBRARY_PATH=/opt/lib:/usr/local/lib
+
+export VISUAL=emacs
+
+export SBCL_HOME=/usr/local/lib/sbcl
+
+export PYTHONPATH=$PYTHONPATH:$HOME/lib/python
+
+export CLASSPATH=$CLASSPATH:.:$HOME/.local/share/java/:$HOME/.local/share/java/abcl.jar:/usr/share/java/junit4.jar
+
+# Google Go
+
+#This line will tell the Go installer where to place the source code before compilation
+export GOROOT=$HOME/Downloads/gosource
+ 
+#With this line, you choose the architecture of your machine.  
+#Those with 64 bit CPUs should enter "amd64" here.  
+export GOARCH=amd64
+ 
+#Your operating system
+export GOOS=linux
+ 
+#And now the location where the installer will place the finished files
+#Don't forget to create this directory before installing
+export GOBIN=$HOME/lib/gobin
+ 
+#Include Go binaries in command path
+export PATH=$PATH:$GOBIN
+
+alias go=ssh
+
+# Apache root
+export APACHE_ROOT=/var/www
+
+alias web=sensible-browser
+
+function safepdf () {
+    evince "$*" 2> /dev/null &
+}
+
+export ANDROID=$HOME/opt/android
+export ANDROID_HOME=$ANDROID
+export PATH=$PATH:$ANDROID/tools:$ANDROID/platform-tools
+
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+export M2_HOME=/usr/local/share/apache-maven/apache-maven-3.0.3
+export MAVEN_HOME=$M2_HOME
+export M2=$M2_HOME/bin
+
+export PATH=$PATH:$M2
+

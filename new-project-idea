@@ -1,0 +1,24 @@
+#! /bin/bash
+
+update-sync-dir
+cd $HOME/projects
+if [ "`grep '.' ideas | tail -1`" = '%' ]
+then
+    if [ "`tail -1 ideas`" = '%' ]
+    then
+	echo "" >> ideas
+    fi
+else
+    if [ "`tail -1 ideas`" = '' ]
+    then
+	echo -e "%\n" >> ideas
+    else
+	echo -e "\n%\n" >> ideas
+    fi
+fi
+
+echo "Write the idea, then type Control-D:"
+
+cat >> ideas
+
+update-sync-dir

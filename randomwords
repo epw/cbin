@@ -1,0 +1,14 @@
+#! /usr/bin/env python
+
+import random, sys
+
+f = open ("/usr/share/dict/words")
+
+words = f.read().split ("\n")
+
+while True:
+    print words[random.randint (0, len (words))]
+    input = raw_input().lower()
+    if input == "q":
+        sys.exit()
+

@@ -1,0 +1,12 @@
+#! /bin/bash
+
+color=
+
+if [ $# -lt 2 ]
+then
+    color='#ff00ff'
+else
+    color=$2
+fi
+
+convert $1 -transparent $color $1

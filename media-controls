@@ -1,0 +1,63 @@
+#! /bin/bash
+
+function pianobar-control () {
+    echo $* > $HOME/.config/pianobar/ctl
+}
+
+function dispatch () {
+    while getopts a:b:r:p: o
+    do
+	case "$o" in
+	    a)
+		if [ "`pgrep audacious`" ]
+		then
+		    eval $OPTARG
+		    break
+		fi ;;
+	    b)
+		if [ "`pgrep banshee`" ]
+		then
+		    eval $OPTARG
+		    break
+		fi ;;
+	    r)
+		if [ "`pgrep rhythmbox`" ]
+		then
+		    eval $OPTARG
+		    break
+		fi ;;
+	    p)
+		if [ "`pgrep pianobar`" ]
+		then
+		    eval $OPTARG
+		    break
+		fi ;;
+	    [?]) echo -e "Usage: dispatch <args>\n\targs can be any of abrp, followed by a command or function" ;;
+	    esac
+    done
+}
+
+function banshee_pause () {
+    if [ `banshee --query-current-state | awk '{print $2}'` = "playing" ]
+    then
+	banshee --pause
+    else
+	banshee --play
+    fi
+}
+
+function pause () {
+    dispatch -a "audacious2 -t" -b "banshee_pause" \
+	-r "rhythmbox-client --play-pause" -p "pianobar-control p"
+}
+
+function next () {
+    dispatch -a "audacious2 -s ; audacious2 -p" -b "banshee --next" \
+	-r "rhythmbox-client --next" -p "pianobar-control n"
+}
+
+action=$1
+
+echo "Running $action"
+
+$action

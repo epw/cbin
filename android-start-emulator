@@ -1,0 +1,3 @@
+#! /bin/bash
+
+$ANDROID/tools/emulator -avd Android2.3.3 -partition-size 128 > /dev/null
