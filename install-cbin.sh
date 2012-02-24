@@ -14,11 +14,12 @@ then
 fi
 
 echo "Writing"
+echo
 
+echo "PATH=\$PATH:$thisdir" | tee -a $rcfile
+echo "source $thisdir/.cbashrc" | tee -a $rcfile
 
-echo "PATH=\$PATH:$thisdir" | tee $rcfile
-echo "source $thisdir/.cbashrc"
-
+echo
 echo "to $rcfile."
 echo
 echo "Run \"source $rcfile\" to begin using cbin."
