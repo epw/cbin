@@ -1,0 +1,12 @@
+This repository serves one main purpose: I have built up hundreds of
+scripts and programs over the years, and always copy the ~/bin
+directory from my most up-to-date computer when starting a new
+one. Instead, they can now be kept synchronized.
+
+To install, add this line to your .bashrc or similar file:
+PATH=$PATH:/path/where/you/downloaded/cbin
+
+Or, from within cbin, run the program
+    $ ./install-cbin.sh
+Which will do the same thing. It takes one optional argument, the name
+of the file to write to if not $HOME/.bashrc
