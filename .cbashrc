@@ -7,8 +7,6 @@ LD_LIBRARY_PATH=/opt/lib:/usr/local/lib
 
 export VISUAL=emacs
 
-export SBCL_HOME=/usr/local/lib/sbcl
-
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python
 
 export CLASSPATH=$CLASSPATH:.:$HOME/.local/share/java/:$HOME/.local/share/java/abcl.jar:/usr/share/java/junit4.jar
