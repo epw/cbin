@@ -1,8 +1,14 @@
 #! /bin/bash
 
 # Constants
-TARGET=android-10
+TARGET=android-22
 NAMESPACE=org.willisson.eric
+
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 <project name>"
+    echo "Creates project in directory named <project name>"
+    exit 0
+fi
 
 # Get project name
 project=$1
