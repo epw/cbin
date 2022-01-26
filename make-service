@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Used https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
+# as a reference
+
+SYSTEMD=/etc/systemd/system
+
+usage() {
+    echo "Usage: $1 <name> <command> [after]"
+    echo "Makes a service with <name> that is started on boot and can be"
+    echo "controlled with systemctl"
+    echo "Args:"
+    echo "  name: the name of the service"
+    echo "  command: the command to run (can include spaces and arguments)"
+    echo "  after: the service's requirements. Default: network.target"
+    echo "This command is very simple. After running it, you might want to edit"
+    echo "the resulting service definition file to change the user, WantedBy,"
+    echo "and other aspects."
+    exit 1
+}
+
+if [[ $# -lt 2 ]]; then
+    usage $0
+fi
+
+name=$1; shift
+command=$1; shift
+echo "$command" | grep -qE '^/'
+if [[ $? -ne 0 ]]; then
+    echo "Error: command must use an absolute path to the executable."
+    echo "Try starting with /usr/bin/env."
+    echo "Got:"
+    echo "$command"
+    exit 1
+fi
+
+after=$1; shift
+
+if [[ -z "$after" ]]; then
+    after=network.target
+fi
+
+cat > $SYSTEMD/$name.service <<EOF
+[Unit]
+Description=make-service generated for $command
+After=$after
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=`logname`
+ExecStart=$command
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+set -e
+systemctl start $name
+systemctl enable $name
