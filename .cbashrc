@@ -9,8 +9,6 @@ export VISUAL=emacs
 
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python
 
-export CLASSPATH=$CLASSPATH:.:$HOME/.local/share/java/:$HOME/.local/share/java/abcl.jar:/usr/share/java/junit4.jar
-
 # Apache root
 export APACHE_ROOT=/var/www
 
@@ -19,15 +17,3 @@ alias web=sensible-browser
 function safepdf () {
     evince "$*" 2> /dev/null &
 }
-
-export ANDROID=$HOME/opt/android
-export ANDROID_HOME=$ANDROID
-export PATH=$PATH:$ANDROID/tools:$ANDROID/platform-tools
-
-export JAVA_HOME=/usr/lib/jvm/java-6-sun
-export M2_HOME=/usr/local/share/apache-maven/apache-maven-3.0.3
-export MAVEN_HOME=$M2_HOME
-export M2=$M2_HOME/bin
-
-export PATH=$PATH:$M2
-
