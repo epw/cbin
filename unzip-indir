@@ -1,0 +1,28 @@
+#! /usr/bin/env python3
+
+import os
+import subprocess
+import sys
+import zipfile
+
+def unzip(filename):
+  orig_cwd = os.getcwd()
+  with zipfile.ZipFile(filename) as z:
+    if len(set([d.split("/")[0] for d in z.namelist()])) > 1:
+      parent = filename.replace(".zip", "")
+      try:
+        os.mkdir(parent)
+        os.chdir(parent)
+      except FileExistsError:
+        return
+      filename = "../" + filename
+    subprocess.run(["unzip", filename])
+  os.chdir(orig_cwd)
+
+def main():
+  for f in sys.argv[1:]:
+    unzip(f)
+
+
+if __name__ == "__main__":
+  main()
