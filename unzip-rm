@@ -1,0 +1,4 @@
+#! /bin/bash
+
+unzip "$1"
+rm -i "$1"
