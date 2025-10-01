@@ -1,0 +1,42 @@
+#! /usr/bin/env python3
+
+# Copyright 2025 Google LLC.
+# SPDX-License-Identifier: Apache-2.0
+
+import argparse
+import os
+import subprocess
+
+parser = argparse.ArgumentParser(
+  prog="ssh-far-copy-id",
+  description="Copy SSH public key from one computer to another via a computer that already has established keys.")
+
+parser.add_argument("-i", "--identity",
+                    default=os.path.join(os.getenv("HOME"), ".ssh", "id_rsa.pub"))
+parser.add_argument("intermediary")
+parser.add_argument("dest")
+
+def copy_id(public_key, intermediary, dest):
+  int_filename = subprocess.run(["ssh", intermediary,
+                                 'mktemp -p "$XDG_RUNTIME_DIR"'],
+                                stdout=subprocess.PIPE,
+                                text=True,
+                                check=True).stdout.strip()
+  subprocess.check_call(["scp", public_key, f"{intermediary}:{int_filename}"])
+  dest_filename = subprocess.run(["ssh", intermediary,
+                                  f'ssh {dest} "mktemp -p \"$XDG_RUNTIME_DIR\""'],
+                                 stdout=subprocess.PIPE,
+                                 text=True,
+                                 check=True).stdout.strip()
+  subprocess.check_call(["ssh", intermediary,
+                         f'scp {int_filename} {dest}:{dest_filename}'])
+  subprocess.check_call(["ssh", intermediary,
+                         f'ssh {dest} "cat {dest_filename} >> \"$HOME/.ssh/authorized_keys\""'])
+
+def main():
+  args = parser.parse_args()
+  copy_id(args.identity, args.intermediary, args.dest)
+  subprocess.check_call(["ssh", args.dest])
+
+if __name__ == "__main__":
+  main()
