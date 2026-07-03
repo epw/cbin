@@ -3,7 +3,15 @@
 # Used https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
 # as a reference
 
-SYSTEMD=/etc/systemd/system
+#ROOT=1
+
+SYSTEMD=$HOME/.config/systemd/user
+USER_FLAG=--user
+if [[ $ROOT -eq 1 ]]; then
+    echo "Installing system-wide."
+    SYSTEMD=/etc/systemd/system
+    USER_FLAG=
+fi
 
 usage() {
     echo "Usage: $1 <name> <command> [after]"
@@ -16,6 +24,8 @@ usage() {
     echo "This command is very simple. After running it, you might want to edit"
     echo "the resulting service definition file to change the user, WantedBy,"
     echo "and other aspects."
+    echo
+    echo "Set ROOT=1 in this script if you want system-wide config."
     exit 1
 }
 
@@ -50,13 +60,19 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=`logname`
 ExecStart=$command
+EOF
+
+if [[ $ROOT -eq 1 ]]; then
+    echo "User=`logname`" >> $SYSTEMD/$name.service
+fi
+
+cat >> $SYSTEMD/$name.service <<EOF
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 set -e
-systemctl start $name
-systemctl enable $name
+systemctl $USER_FLAG start $name
+systemctl $USER_FLAG enable $name

@@ -5,7 +5,8 @@ import subprocess
 import sys
 import zipfile
 
-def unzip(filename):
+def unzip(filename, delete):
+  orig_filename = filename
   orig_cwd = os.getcwd()
   with zipfile.ZipFile(filename) as z:
     if len(set([d.split("/")[0] for d in z.namelist()])) > 1:
@@ -18,10 +19,18 @@ def unzip(filename):
       filename = "../" + filename
     subprocess.run(["unzip", filename])
   os.chdir(orig_cwd)
+  if delete:
+    os.remove(orig_filename)
 
 def main():
-  for f in sys.argv[1:]:
-    unzip(f)
+  delete = False
+  args = sys.argv[1:]
+  if args[0].startswith("-"):
+    if args[0] == "-d" or args[0] == "--delete":
+      delete = True
+    args.pop(0)
+  for f in args:
+    unzip(f, delete)
 
 
 if __name__ == "__main__":
