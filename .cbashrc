@@ -17,3 +17,7 @@ alias web=sensible-browser
 function safepdf () {
     evince "$*" 2> /dev/null &
 }
+
+# Usage: ls | for-lines; do echo $line; done
+# (prints files, even with spaces, one per line)
+alias for-lines='while IFS= read -r line'
